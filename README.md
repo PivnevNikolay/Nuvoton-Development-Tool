@@ -9,6 +9,11 @@ Nu-Link2-Me можно отделить от NuMaker-M031TC, что позвол
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/001.jpg "NuMaker-M031TC")
 
+В качестве основного целевого устройства используется микроконтроллер [M031TC1AE.](https://www.nuvoton.com/products/microcontrollers/arm-cortex-m0-mcus/m031-series/)
+
+что то почитать и посмотреть можно [здесь...](http://www.mymcu.ru/support/otladochnaya-plata-numaker-pfm-m487.html)  
+[Магазин](https://direct.nuvoton.com/ru/) гдея покупал отладочные платы ...
+
  
 
 
