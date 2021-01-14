@@ -17,11 +17,11 @@ Nu-Link2-Me можно отделить от NuMaker-M031TC, что позвол
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/004.jpg "NuMaker-PFM-M487KM")  
 
-В качестве основного целевого устройства используется микроконтроллер [M487KMCAN](https://www.nuvoton.com/products/microcontrollers/arm-cortex-m4-mcus/m487-ethernet-series/m487kmcan/)
+В качестве основного целевого устройства используется микроконтроллер [M487KMCAN.](https://www.nuvoton.com/products/microcontrollers/arm-cortex-m4-mcus/m487-ethernet-series/m487kmcan/)
 
 что то почитать и посмотреть можно [здесь...](http://www.mymcu.ru/support/otladochnaya-plata-numaker-pfm-m487.html)  
-[здесь](https://ic-contract.ru/forum/mikrokontrollery/5993-znakomstvo-s-nuvoton-m486-rabota-s-gpio-uart-i-vneshnimi-preryvaniyam.html) тоже можно почитать    
-[Магазин](https://direct.nuvoton.com/ru/) гдея покупал отладочные платы ...
+[здесь](https://ic-contract.ru/forum/mikrokontrollery/5993-znakomstvo-s-nuvoton-m486-rabota-s-gpio-uart-i-vneshnimi-preryvaniyam.html) тоже можно почитать...    
+[Магазин](https://direct.nuvoton.com/ru/) где я покупал отладочные платы ...
 
  
 
