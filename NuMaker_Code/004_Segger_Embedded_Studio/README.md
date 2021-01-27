@@ -6,4 +6,8 @@
 [Более полный список отладочных плат](https://www.nuvoton.com/tool-and-software/evaluation-board).   
 [Github Nuvoton Technology Corp](https://github.com/OpenNuvoton/).  
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/005.jpg "NT_NUC123SE") 
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/005.jpg "NT_NUC123SE")   
+
+После установки запускаем среду и идем в Tools-->Package manager скролим Nuvoton и устанавливаем необходимые Support Package.  
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/006.jpg "Support_Package")  
