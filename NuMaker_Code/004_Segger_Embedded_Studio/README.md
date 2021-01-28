@@ -12,4 +12,10 @@
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/006.jpg "Support_Package")  
 
-Запускаем  Segger Embedded Studio. Через меню->File->New Project создаем новый проект. Далее необходимо скачать peripheral driver header and source files, это можно сделать на странице Nuvoton Github, или через сайт Nuvoton. Переходим в папку проекта ...........NUC123\CMSIS\Device\Source и вставляем  туда необходимые файлы той переферии с которой будете работать. Для моего проета это sys.c ; clk.c ; gpio.c ; uart.c  ... В Project items  добавляем папку src и наши файлы.
+Запускаем  Segger Embedded Studio. Через меню->File->New Project создаем новый проект. Далее необходимо скачать peripheral driver header and source files, это можно сделать на странице Nuvoton Github, или через сайт Nuvoton. Переходим в папку проекта ...........NUC123\CMSIS\Device\Source и вставляем  туда необходимые файлы той переферии с которой будете работать. Для моего проета это sys.c ; clk.c ; gpio.c ; uart.c  ... В Project items  добавляем папку src и наши файлы.  
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/007.jpg "Project_items")   
+
+### Системный таймер SysTick.  
+
+В примере мигаем светодиодом который находится на PB4 при помощи SysTick. SysTick это 24-разрядный таймер он может принемать значение от 0 до 2^24-1 и отсчитывает вниз от заданного значения до нуля, после чего перегружается и генерирует прерывание. Так как таймер – часть ядра, он входит в библиотеку CMSIS. 
