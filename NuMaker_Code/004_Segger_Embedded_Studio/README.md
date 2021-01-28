@@ -11,3 +11,5 @@
 После установки запускаем среду и идем в Tools-->Package manager скролим Nuvoton и устанавливаем необходимые Support Package.  
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/006.jpg "Support_Package")  
+
+Запускаем  Segger Embedded Studio. Через меню->File->New Project создаем новый проект. Далее необходимо скачать peripheral driver header and source files, это можно сделать на странице Nuvoton Github, или через сайт Nuvoton. Переходим в папку проекта ...........NUC123\CMSIS\Device\Source и вставляем  туда необходимые файлы той переферии с которой будете работать. Для моего проета это sys.c ; clk.c ; gpio.c ; uart.c  ... В Project items  добавляем папку src и наши файлы.
