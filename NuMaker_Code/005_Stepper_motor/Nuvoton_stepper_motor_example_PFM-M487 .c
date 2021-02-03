@@ -112,10 +112,14 @@ void SYS_Init(void)
 void Rotation_MOTOR(unsigned int deg, unsigned char motor_dir)
 {
     while(Motor_Count);
-    Motor_Count = deg;
-    Dir_flag = motor_dir;
-    // Start Timer 0
-    TIMER_Start(TIMER0);
+	/*      ошибка вот здесь!!!
+	*   Motor_Count здесь еще равен нулю 
+	*   и данная функция при первом определении будет просто пройдена с значением 0
+	*	при этом даже не произошел старт таймера 	
+	*/
+    Motor_Count = deg;//в этом месте Motor_Count=deg=d360=4096
+    Dir_flag = motor_dir;   
+    TIMER_Start(TIMER0);//старт таймера
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -138,7 +142,7 @@ int32_t main(void)
     /* Enable Timer0 NVIC */
     NVIC_EnableIRQ(TMR0_IRQn);
     
-    /* Configure PA.0 PA.1 PA.2 PA.3 set open drain mode, motor control IO */
+    /* Configure PA.0 PA.1 PA.2 PA.3 set open drain mode, motor control IO с этой конфигурацией тоже не работает*/
     GPIO_SetMode(PA, (BIT0 | BIT1 | BIT2 | BIT3), GPIO_MODE_OPEN_DRAIN);
     printf("\n===============================================\n");
     printf("The motor is turning a circle of counterclockwise!\n");
