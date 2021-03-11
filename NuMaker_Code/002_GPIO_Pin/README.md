@@ -28,4 +28,8 @@
 //Enable PB.4 interrupt with falling edge trigger  
 *GPIO_EnableInt(PB, 4, GPIO_INT_FALLING);*  
 
+Также реализована функция программного устранения (подавления) дребезга кнопок (GPIO De-bounce Function).  
+// Set de-bounce function  
+*GPIO_SET_DEBOUNCE_TIME(GPIO_DBCTL_DBCLKSRC_LIRC, GPIO_DBCTL_DBCLKSEL_512);*  
+*GPIO_ENABLE_DEBOUNCE(PB, BIT4);*  
 
