@@ -12,5 +12,20 @@
 
 +  Push-pull Output Mode.   
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/002_%20Push-Pull%20Output.jpg "")   
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/002_%20Push-Pull%20Output.jpg "")    
+
++  Open-drain Mode.  
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/003_%20Open-Drain%20Output.jpg"")    
+
++  Quasi-bidirectional Mode.  
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/004_Quasi-Bidirectional%20IO%20Mode.jpg"")   
+
+Примеры кода :  
+//Set PC.3 ~ PC.5 to GPIO output   
+*GPIO_SetMode(PC, (BIT3 | BIT4 | BIT5), GPIO_MODE_OUTPUT);*  
+//Enable PB.4 interrupt with falling edge trigger  
+*GPIO_EnableInt(PB, 4, GPIO_INT_FALLING);*  
+
 
