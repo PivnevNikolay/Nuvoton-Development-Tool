@@ -16,11 +16,11 @@
 
 +  Open-drain Mode.  
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/003_%20Open-Drain%20Output.jpg"")    
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/003_%20Open-Drain%20Output.jpg "")    
 
 +  Quasi-bidirectional Mode.  
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/004_Quasi-Bidirectional%20IO%20Mode.jpg"")   
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO_Pin/photos/004_Quasi-Bidirectional%20IO%20Mode.jpg "")   
 
 Примеры кода :  
 //Set PC.3 ~ PC.5 to GPIO output   
