@@ -40,7 +40,7 @@ void SYS_Init(void)
 
 int main(void)
 {
-		int8_t ch;  
+	int8_t ch;  
     SYS_Init();
     //-----------------------------------------------------------------------------//
 #if defined (__GNUC__) && !defined(__ARMCC_VERSION) && defined(OS_USE_SEMIHOSTING)
