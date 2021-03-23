@@ -25,16 +25,15 @@
 Примеры кода :  
 /*!
 \code  
-//Set PC.3 ~ PC.5 to GPIO output   
-*GPIO_SetMode(PC, (BIT3 | BIT4 | BIT5), GPIO_MODE_OUTPUT);*  
-//Enable PB.4 interrupt with falling edge trigger  
-*GPIO_EnableInt(PB, 4, GPIO_INT_FALLING);*  
-\endcode  
+\brief Set PC.3 ~ PC.5 to GPIO output   
+GPIO_SetMode(PC, (BIT3 | BIT4 | BIT5), GPIO_MODE_OUTPUT);  
+\brief Enable PB.4 interrupt with falling edge trigger  
+GPIO_EnableInt(PB, 4, GPIO_INT_FALLING);  
 
-Также реализована функция программного устранения (подавления) дребезга кнопок (GPIO De-bounce Function):  
-\code  
-// Set de-bounce function  
-*GPIO_SET_DEBOUNCE_TIME(GPIO_DBCTL_DBCLKSRC_LIRC, GPIO_DBCTL_DBCLKSEL_512);*  
-*GPIO_ENABLE_DEBOUNCE(PB, BIT4);*  
+
+\brief Также реализована функция программного устранения (подавления) дребезга кнопок (GPIO De-bounce Function):  
+
+GPIO_SET_DEBOUNCE_TIME(GPIO_DBCTL_DBCLKSRC_LIRC, GPIO_DBCTL_DBCLKSEL_512);  
+GPIO_ENABLE_DEBOUNCE(PB, BIT4);  
 \endcode  
 */
