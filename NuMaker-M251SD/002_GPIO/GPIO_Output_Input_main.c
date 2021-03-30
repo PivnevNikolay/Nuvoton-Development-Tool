@@ -38,7 +38,7 @@ void UART0_Init()
 
 int main(void)
 	{
-		// Unlock protected registers
+	// Unlock protected registers
     SYS_UnlockReg();
     // Init System, peripheral clock and multi-function I/O 
     SYS_Init();
@@ -51,6 +51,7 @@ int main(void)
     while (1){			
 		for ( z =0;z<10;z++){
 			PB->DOUT = led[z];
+			printf("z = %u \n",z);
 			CLK_SysTickDelay(349525);
 		  }
 	  }
