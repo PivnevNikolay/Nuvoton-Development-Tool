@@ -11,9 +11,11 @@ GPIO - это порты ввода-вывода общего назначени
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker-M251SD/002_GPIO/photos/001.jpg "")   
 
 *Цель:* вывести цифры от 0 до 9.  
-Подключаем семисегментный индикатор согласно схемы.  
+Подключаем семисегментный индикатор согласно схемы. При подключении не забываем про ограничительные резисторы.   
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker-M251SD/002_GPIO/photos/002.jpg "")   
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker-M251SD/002_GPIO/photos/003.jpg "") 
   
 
  
