@@ -1,31 +1,31 @@
 /*******************************************************************************
  * Show how to wake up system from Power-down mode by GPIO interrupt.
- * Как вывести систему из режима Power-down с помощью прерывания GPIO. 
+ * РљР°Рє РІС‹РІРµСЃС‚Рё СЃРёСЃС‚РµРјСѓ РёР· СЂРµР¶РёРјР° Power-down СЃ РїРѕРјРѕС‰СЊСЋ РїСЂРµСЂС‹РІР°РЅРёСЏ GPIO. 
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Function for System Entry to Power Down Mode                                                           */
-/*  Функция входа системы в режим пониженного энергопотребления                                            */
+/*  Р¤СѓРЅРєС†РёСЏ РІС…РѕРґР° СЃРёСЃС‚РµРјС‹ РІ СЂРµР¶РёРј РїРѕРЅРёР¶РµРЅРЅРѕРіРѕ СЌРЅРµСЂРіРѕРїРѕС‚СЂРµР±Р»РµРЅРёСЏ                                            */
 /*---------------------------------------------------------------------------------------------------------*/
 void PowerDownFunction(void)
 {
-    /* Check if all the debug messages are finished ... Проверьте, все ли сообщения отладки завершены */
+    /* Check if all the debug messages are finished ... РџСЂРѕРІРµСЂСЊС‚Рµ, РІСЃРµ Р»Рё СЃРѕРѕР±С‰РµРЅРёСЏ РѕС‚Р»Р°РґРєРё Р·Р°РІРµСЂС€РµРЅС‹ */
     UART_WAIT_TX_EMPTY(UART0);
 /**
  *    @brief        Wait specified UART port transmission is over
- *                  Дождитесь завершения передачи указанного порта UART 
+ *                  Р”РѕР¶РґРёС‚РµСЃСЊ Р·Р°РІРµСЂС€РµРЅРёСЏ РїРµСЂРµРґР°С‡Рё СѓРєР°Р·Р°РЅРЅРѕРіРѕ РїРѕСЂС‚Р° UART 
  *    @param[in]    uart    The pointer of the specified UART module
- *                          Указатель указанного модуля UART 
+ *                          РЈРєР°Р·Р°С‚РµР»СЊ СѓРєР°Р·Р°РЅРЅРѕРіРѕ РјРѕРґСѓР»СЏ UART 
  *    @return       None
  *
  *    @details      This macro wait specified UART port transmission is over.
- *                  Этот макрос ожидает завершения передачи указанного порта UART.   
+ *                  Р­С‚РѕС‚ РјР°РєСЂРѕСЃ РѕР¶РёРґР°РµС‚ Р·Р°РІРµСЂС€РµРЅРёСЏ РїРµСЂРµРґР°С‡Рё СѓРєР°Р·Р°РЅРЅРѕРіРѕ РїРѕСЂС‚Р° UART.   
  *    #define UART_WAIT_TX_EMPTY(uart)    while(!((((uart)->FIFOSTS) & UART_FIFOSTS_TXEMPTYF_Msk) >> UART_FIFOSTS_TXEMPTYF_Pos))
  */		
 
-    /* Enter to Power-down mode ... Войдите в режим пониженного энергопотребления */
+    /* Enter to Power-down mode ... Р’РѕР№РґРёС‚Рµ РІ СЂРµР¶РёРј РїРѕРЅРёР¶РµРЅРЅРѕРіРѕ СЌРЅРµСЂРіРѕРїРѕС‚СЂРµР±Р»РµРЅРёСЏ */
     CLK_PowerDown();
 	
 /*	void CLK_PowerDown(void)
@@ -33,29 +33,29 @@ void PowerDownFunction(void)
     uint32_t u32HIRCTRIMCTL, u32MIRCTRIMCTL;
 
     // Set the processor uses deep sleep as its low power mode 
-    //устанавливаем режим процессора, использующий глубокий сон в качестве режима низкого энергопотребления. 
+    //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂРµР¶РёРј РїСЂРѕС†РµСЃСЃРѕСЂР°, РёСЃРїРѕР»СЊР·СѓСЋС‰РёР№ РіР»СѓР±РѕРєРёР№ СЃРѕРЅ РІ РєР°С‡РµСЃС‚РІРµ СЂРµР¶РёРјР° РЅРёР·РєРѕРіРѕ СЌРЅРµСЂРіРѕРїРѕС‚СЂРµР±Р»РµРЅРёСЏ. 
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
     // Set system Power-down enabled
-	  //отключение питания системы 
+	  //РѕС‚РєР»СЋС‡РµРЅРёРµ РїРёС‚Р°РЅРёСЏ СЃРёСЃС‚РµРјС‹ 
     CLK->PWRCTL |= (CLK_PWRCTL_PDEN_Msk);
 
     // Store HIRC/MIRC control register 
-	  //Сохраняем регистр управления HIRC / MIRC 
+	  //РЎРѕС…СЂР°РЅСЏРµРј СЂРµРіРёСЃС‚СЂ СѓРїСЂР°РІР»РµРЅРёСЏ HIRC / MIRC 
     u32HIRCTRIMCTL = SYS->HIRCTRIMCTL;
     u32MIRCTRIMCTL = SYS->MIRCTRIMCTL;
 
     // Disable HIRC/MIRC auto trim
-	  //Отключить автоматическую обрезку HIRC / MIRC ???
+	  //РћС‚РєР»СЋС‡РёС‚СЊ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєСѓСЋ РѕР±СЂРµР·РєСѓ HIRC / MIRC ???
     SYS->HIRCTRIMCTL &= (~SYS_HIRCTRIMCTL_FREQSEL_Msk);
     SYS->MIRCTRIMCTL &= (~SYS_MIRCTRIMCTL_FREQSEL_Msk);
 
     // Chip enter Power-down mode after CPU run WFI instruction
-	  //Чип переходит в режим пониженного энергопотребления после того, как ЦП запустит инструкцию WFI ???
+	  //Р§РёРї РїРµСЂРµС…РѕРґРёС‚ РІ СЂРµР¶РёРј РїРѕРЅРёР¶РµРЅРЅРѕРіРѕ СЌРЅРµСЂРіРѕРїРѕС‚СЂРµР±Р»РµРЅРёСЏ РїРѕСЃР»Рµ С‚РѕРіРѕ, РєР°Рє Р¦Рџ Р·Р°РїСѓСЃС‚РёС‚ РёРЅСЃС‚СЂСѓРєС†РёСЋ WFI ???
     __WFI();
 
     // Restore HIRC/MIRC control register
-	  //	Восстановить регистр управления HIRC / MIRC ???
+	  //	Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ СЂРµРіРёСЃС‚СЂ СѓРїСЂР°РІР»РµРЅРёСЏ HIRC / MIRC ???
     SYS->HIRCTRIMCTL = u32HIRCTRIMCTL;
     SYS->MIRCTRIMCTL = u32MIRCTRIMCTL;
 }*/
@@ -64,7 +64,7 @@ void PowerDownFunction(void)
 /*
  * @brief       GPIO PB IRQ
  * @details     The PB default IRQ, declared in startup_M251.s.  
- * IRQ по умолчанию для PB, объявленный в startup_M251.s. 
+ * IRQ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ PB, РѕР±СЉСЏРІР»РµРЅРЅС‹Р№ РІ startup_M251.s. 
  */
 void GPB_IRQHandler(void)
 {
