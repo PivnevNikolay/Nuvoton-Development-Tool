@@ -5,6 +5,11 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
+//                0    1   2    3     4   5    6    7   8    9
+uint8_t led[10]={0x3F,0x6,0x5B,0x4F,0x66,0x6D,0x7D,0x7,0x7F,0x6F};
+uint8_t z = 0;
+uint8_t i = 0;
+
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Function for System Entry to Power Down Mode                                                           */
 /*  Функция входа системы в режим пониженного энергопотребления                                            */
@@ -61,23 +66,32 @@ void PowerDownFunction(void)
 }*/
 }
 /*---------------------------------------------------------------------------------------------------------*/
-/*
- * @brief       GPIO PB IRQ
- * @details     The PB default IRQ, declared in startup_M251.s.  
- * IRQ по умолчанию для PB, объявленный в startup_M251.s. 
- */
-void GPB_IRQHandler(void)
+void GPA_IRQHandler(void)
 {
-    /* To check if PB.3 interrupt occurred */
-    if (GPIO_GET_INT_FLAG(PB, BIT3))
+    /* To check if PA.0 interrupt occurred */
+    if (GPIO_GET_INT_FLAG(PA, BIT0))
     {
-        GPIO_CLR_INT_FLAG(PB, BIT3);
-        printf("PB.3 INT occurred.\n");
+        GPIO_CLR_INT_FLAG(PA, BIT0);
+        printf("PA.0 interrupt occurred.\n");
+			  z++;
+			  if(z>=9)z=9;
+			  PB->DOUT=led[z];
+			printf("z = %u \n",z);
+    }
+		/* To check if PA.1 interrupt occurred */
+    else if (GPIO_GET_INT_FLAG(PA, BIT1))
+    {
+        GPIO_CLR_INT_FLAG(PA, BIT1);
+        printf("PA.1 interrupt occurred.\n");
+				z--;
+			if(z==255)z=0;
+			PB->DOUT=led[z];
+			printf("z = %u \n",z);
     }
     else
     {
-        /* Un-expected interrupt. Just clear all PB interrupts */
-        PB->INTSRC = PB->INTSRC;
+        /* Un-expected interrupt. Just clear all PA interrupts */
+        PA->INTSRC = PA->INTSRC;
         printf("Un-expected interrupts.\n");
     }
 }
@@ -145,15 +159,18 @@ int main(void)
     printf("+-------------------------------------------------------+\n");
     printf("|    GPIO Power-Down and Wake-up by PB.3 Sample Code    |\n");
     printf("+-------------------------------------------------------+\n\n");
+	
+	  /*Configure PB.0 PB.1 PB.2 PB.3 PB.4 PB.5 PB.6 as Output mode*/
+    GPIO_SetMode(PB, (BIT0 | BIT1 | BIT2 | BIT3 | BIT4 | BIT5 | BIT6), GPIO_MODE_OUTPUT);
+	  GPIO_SetMode(PB, (BIT14), GPIO_MODE_OUTPUT);
 
-    /* Configure PB.3 as Input mode and enable interrupt by rising edge trigger */
-    GPIO_SetMode(PB, BIT3, GPIO_MODE_INPUT);
-    GPIO_EnableInt(PB, 3, GPIO_INT_RISING);
-    NVIC_EnableIRQ(GPB_IRQn);
+    /* Configure PA.0 PA.1 as Input mode and enable interrupt by rising edge trigger */
+    GPIO_SetMode(PA, BIT0|BIT1,GPIO_MODE_INPUT);
+    GPIO_EnableInt(PA, 0, GPIO_INT_RISING);
+	  GPIO_EnableInt(PA, 1, GPIO_INT_RISING);
+    NVIC_EnableIRQ(GPA_IRQn);
 
-    /* Enable interrupt de-bounce function and select de-bounce sampling cycle time is 1024 clocks of LIRC clock */
-    // GPIO_SET_DEBOUNCE_TIME(GPIO_DBCTL_DBCLKSRC_LIRC, GPIO_DBCTL_DBCLKSEL_1024);
-    //  GPIO_ENABLE_DEBOUNCE(PB, BIT3);
+	  PB->DOUT=led[0];
 
     /* Unlock protected registers before entering Power-down mode */
     SYS_UnlockReg();
@@ -161,12 +178,17 @@ int main(void)
     /* Waiting for PB.3 rising-edge interrupt event */
     while (1)
     {
-        printf("Enter to Power-Down ......\n");
-
+			  for(i=0;i<=20;i++){
+			  GPIO_TOGGLE(PB14);
+			  CLK_SysTickDelay(349525);					
+        printf("i = %u \n",i);
         /* Enter to Power-down mode */
+					if(i==5){
         PowerDownFunction();
-
-        printf("System waken-up done.\n\n");
+        printf("System waken-up done.\n");
+			  CLK_SysTickDelay(349525);
+					}
+				}
     }
 
 }
