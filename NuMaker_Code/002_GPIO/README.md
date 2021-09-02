@@ -8,16 +8,16 @@ GPIO - это порты ввода-вывода общего назначени
 Более полная информация доступна в Reference Manual ...
 Для практического примера нам потребуется семисегментный индикатор, 1 символ с точкой , общий катод  5161AS (5611AS).  
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker-M251SD/002_GPIO/photos/001.jpg "")   
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO/photos/001.jpg "")   
 
 *Цель:* вывести цифры от 0 до 9.  
 Подключаем семисегментный индикатор согласно схемы. При подключении не забываем про ограничительные резисторы.   
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker-M251SD/002_GPIO/photos/003.jpg "")   
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO/photos/003.jpg "")   
 
 Особенности подключения к отладочной плате, о которых надо упомянуть чтобы не запутаться.   
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker-M251SD/002_GPIO/photos/004.jpg "")   
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/002_GPIO/photos/004.jpg "")   
 
 
   
