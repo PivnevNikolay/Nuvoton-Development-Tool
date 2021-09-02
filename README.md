@@ -5,7 +5,7 @@
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/004.jpg "NuMaker-PFM-M487KM")  
 
 В качестве основного целевого устройства используется микроконтроллер [M487KMCAN.](https://www.nuvoton.com/products/microcontrollers/arm-cortex-m4-mcus/m487-ethernet-series/m487kmcan/)  
-Микроконтроллер Nuvoton M486 имеет следующие характеристики:  
+Микроконтроллер Nuvoton M487JIDAE имеет следующие характеристики:  
 + Частота ядра до 192 МГц;  
 + **512 Кб Flash memory с нулевым временным ожиданием (zero-wait state) (512 KB zero-wait state Flash memory);**  
 + **160 Кб RAM, включая 32 Кб внешнего SPI Flash кэша (160 KB RAM, including 32 KB external SPI Flash cache);**  
