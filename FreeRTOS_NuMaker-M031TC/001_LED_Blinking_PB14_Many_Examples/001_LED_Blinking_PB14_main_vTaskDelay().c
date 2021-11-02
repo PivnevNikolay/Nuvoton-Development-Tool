@@ -1,6 +1,6 @@
 /*
 23.10.2021
-Blinking LED PB14...
+Blinking LED PB14 vTaskDelay();
 */
 #include <stdio.h>
 #include "NuMicro.h"
