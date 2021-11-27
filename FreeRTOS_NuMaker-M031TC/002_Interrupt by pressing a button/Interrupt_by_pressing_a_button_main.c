@@ -29,14 +29,14 @@ BaseType_t xYieldRequired;
         temp = PB->INTSRC;
         PB->INTSRC = temp;
         printf("Un-expected interrupts.\n");
-    }	
-	xYieldRequired = xTaskResumeFromISR(myIntTaskHandle);
-	portYIELD_FROM_ISR(xYieldRequired);
+    }
+    xYieldRequired = xTaskResumeFromISR(myIntTaskHandle);
+    portYIELD_FROM_ISR(xYieldRequired);
 }
 /*-------------------------------------------------------------------------*/
 void SYS_Init(void)
 {
-	SYS_UnlockReg();
+    SYS_UnlockReg();
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
@@ -45,7 +45,7 @@ void SYS_Init(void)
     SystemCoreClockUpdate();
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
-	SYS_LockReg(); 
+    SYS_LockReg(); 
 }
 /*-------------------------------------------------------------------------*/
 void UART0_Init()
@@ -57,9 +57,9 @@ void UART0_Init()
 void myIntTask(void *arg)
 {
 	while(1) {
-			vTaskSuspend(NULL);
-		  printf("you pressed a button\r\n");						
-	}	
+		vTaskSuspend(NULL);
+		printf("you pressed a button\r\n");
+	}
 }
 /*-------------------------------------------------------------------------*/
 void LED_Task(void *arg)
@@ -68,7 +68,7 @@ void LED_Task(void *arg)
 		LastWakeTime = xTaskGetTickCount();	
 	while(1) {
 		GPIO_TOGGLE(PB14); 
-		printf("LED_Task_running\n");			
+		printf("LED_Task_running\n");
 		vTaskDelayUntil(&LastWakeTime, 1000);
 	}
 }
@@ -77,7 +77,7 @@ int main()
 {	  
     SYS_Init();    
     UART0_Init();
-	GPIO_SetMode(PB, BIT14, GPIO_MODE_OUTPUT);		
+	GPIO_SetMode(PB, BIT14, GPIO_MODE_OUTPUT);
     GPIO_SetMode(PB, BIT2, GPIO_MODE_INPUT);
     GPIO_EnableInt(PB, 2, GPIO_INT_RISING);
     NVIC_EnableIRQ(GPIO_PAPB_IRQn);//GPAB_IRQHandler
@@ -90,8 +90,8 @@ int main()
         0,              /* No param passed to task function */
         tskIDLE_PRIORITY,              /* Low priority */
         &myTask1Handle );            /* Not using the task handle */
-/*-Create a task for the button(PB2), when pressed, an interruption occurs-*/ 	
-		xTaskCreate(
+/*-Create a task for the button(PB2), when pressed, an interruption occurs-*/
+        xTaskCreate(
         myIntTask,       /* Task function */
         "IntTask",    /* Task name (string) */
         50,            /* Task stack, allocated from heap */
