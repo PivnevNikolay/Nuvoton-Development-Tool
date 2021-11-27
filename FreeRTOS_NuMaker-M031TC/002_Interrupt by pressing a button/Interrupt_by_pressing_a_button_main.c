@@ -13,7 +13,6 @@ https://www.freertos.org/taskresumefromisr.html
 uint32_t LastWakeTime;
 TaskHandle_t myIntTaskHandle= NULL;
 TaskHandle_t myTask1Handle = NULL;
-BaseType_t xYieldRequired;
 /*-------------------------------------------------------------------------*/
 void GPAB_IRQHandler(void)
 {
