@@ -10,7 +10,7 @@ Hам понадобятся следующие [user manual](https://www.nuvoto
 
 В *User Manual NuMicro M251* открыть пункт 3.15 и настроить работу виртуального COM порта на отладочной плате, переместив  переключатели Nu-Link2-Me VCOM 1 и 2 в положение *ON*.   
 
-![alt-текст]("https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/000_Semihost/photos/001.jpg")   
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/000_Semihost/photos/001.jpg "Semihost. hello_world")   
 
 В *NU-Link2-Pro debagger* and programmer открыть пункт 4 *Debugging and programming*. В этом разделе кратко описываются функции отладки, поддерживаемые Nu-Link2-Pro. Для меня интересны две функции :  
 
@@ -21,9 +21,9 @@ Hам понадобятся следующие [user manual](https://www.nuvoto
 **_Semihost_** - При использовании функции Semihost сообщение микроконтроллера M251SD2AE может выводиться через UART в окно отладки Nu-Link2-Pro. То есть сообщение выводится без участия GPIO. Выполним следующие действия, чтобы использовать Semihost (на примере Keil MDK и серии M251). Project →Options for Target →C/C+, and paste
 "DEBUG_ENABLE_SEMIHOST" in the Define field to enable semihost.   
 
-![alt-текст]("https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/000_Semihost/photos/002.jpg")    
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/000_Semihost/photos/002.jpg "Semihost. hello_world")    
 
 Нажмём Rebuild и войдём в режим отладки. В режиме отладки вызовите View → Serial Windows → UART # 1.  Жмём F5 и наблюдаем вывод отладочных сообщений на UART # 1.  
 
-![alt-текст]("https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/000_Semihost/photos/003.jpg")    
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/NuMaker_Code/000_Semihost/photos/003.jpg "Semihost. hello_world")    
  
