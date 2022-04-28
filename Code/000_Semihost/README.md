@@ -10,7 +10,7 @@ Hам понадобятся следующие [user manual](https://www.nuvoto
 
 В *User Manual NuMicro M251* открыть пункт 3.15 и настроить работу виртуального COM порта на отладочной плате, переместив  переключатели Nu-Link2-Me VCOM 1 и 2 в положение *ON*.   
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/Code/000_Semihost/photos/001.jpggit  "Semihost. hello_world")   
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/Code/000_Semihost/photos/001.jpg "Semihost. hello_world")   
 
 В *NU-Link2-Pro debagger* and programmer открыть пункт 4 *Debugging and programming*. В этом разделе кратко описываются функции отладки, поддерживаемые Nu-Link2-Pro. Для меня интересны две функции :  
 
