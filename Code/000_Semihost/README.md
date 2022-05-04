@@ -26,4 +26,8 @@ Hам понадобятся следующие [user manual](https://www.nuvoto
 Нажмём Rebuild и войдём в режим отладки. В режиме отладки вызовите View → Serial Windows → UART # 1.  Жмём F5 и наблюдаем вывод отладочных сообщений на UART # 1.  
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/Code/000_Semihost/photos/003.jpg "Semihost. hello_world")    
+
+Результат :
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/Code/000_Semihost/photos/004.jpg "Semihost. hello_world")  
  
