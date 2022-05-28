@@ -8,3 +8,5 @@ User Manual.
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/013.jpg "NuEclipse hello world")  
 
+M487KMCAN смотрим ключевые особености 2.5 (2500 kB)MB zero-wait state Flash memory,128 kB RAM. Также необходимо указать дополнительный путь к библиотеке (additional librory path). Указываем путь до папки Librory в которая расположена в BSP. В данной папке нам будут интересны: CMSIS, Device, StdDriver.  
+
