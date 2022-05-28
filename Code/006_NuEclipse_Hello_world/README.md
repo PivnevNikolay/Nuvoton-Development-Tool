@@ -6,5 +6,5 @@ User Manual.
 3. Скачиваем [BSP.](https://github.com/OpenNuvoton/M480BSP)  
 4. Запускаем NuEclipse. File->New->Project-> C/C++ ->C Project. Далее вписываем Project name:, выбираем Hello World Nuvoton Cortex-M Project и жмём Next.  
 
-![alt-текст]https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/Code/000_Semihost/photos/013.jpg "NuEclipse hello world")  
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/Code/000_Semihost/photos/013.jpg "NuEclipse hello world")  
 
