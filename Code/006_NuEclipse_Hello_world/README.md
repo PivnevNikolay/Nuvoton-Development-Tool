@@ -8,5 +8,12 @@ User Manual.
 
 ![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/013.jpg "NuEclipse hello world")  
 
-M487KMCAN смотрим ключевые особености 2.5 (2500 kB)MB zero-wait state Flash memory,128 kB RAM. Также необходимо указать дополнительный путь к библиотеке (additional librory path). Указываем путь до папки Librory в которая расположена в BSP. В данной папке нам будут интересны: CMSIS, Device, StdDriver.  
+5. M487KMCAN смотрим ключевые особености 2.5 (2500 kB)MB zero-wait state Flash memory,128 kB RAM. Также необходимо указать дополнительный путь к библиотеке (additional librory path). Указываем путь до папки Librory в которая расположена в BSP. В данной папке нам будут интересны: CMSIS, Device, StdDriver. Clicking the Finish button.  
+6. Debug Configuration. Подготовка конфигурации Run -> Debug Configuration.  
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/014.jpg "NuEclipse hello world")
+
+7. Terminal. Window->Show View->Terminal. Далее необходимо указать номер COM порта.  
+
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/015.jpg "NuEclipse hello world")
 
