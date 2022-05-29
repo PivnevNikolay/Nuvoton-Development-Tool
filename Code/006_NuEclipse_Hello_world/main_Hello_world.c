@@ -1,3 +1,9 @@
+/**-----------------------------------------------------------------------------------------------
+*\date  29.05.2022
+*\brief 
+*\authors ScuratovaAnna + PivnevNikolay
+* Ссылка на Telegram канал: https://t.me/nuvoton_programming
+*/
 #include <stdio.h>
 #include "NuMicro.h"
 #define PLL_CLOCK           192000000
@@ -29,16 +35,20 @@ void SYS_Init(void)
     SYS_LockReg();
 }
 
-/*
- * This is a template project for M480 series MCU. 
- * This template application uses external crystal as HCLK source and configures UART0 to print out
- * "Hello World".
- */
+    /*---------------------------------------------------------------------------------------------------------*/
+    /* This is a template project for M480 series MCU.                                                         */
+    /* This template application uses external crystal as HCLK source and configures UART0 to print out        */
+    /* "Hello World", SystemCoreClock, CLK_GetHXTFreq                                                          */
+    /*---------------------------------------------------------------------------------------------------------*/
 
 int main()
 {
     SYS_Init();
     UART_Open(UART0, 115200);
-    printf("Hello World\n");    
+    printf("Hello World\n");
+    printf("CPU -> %d Hz\n", SystemCoreClock);
+    uint32_t GetHXT;
+    GetHXT=CLK_GetHXTFreq();
+    printf("HXTEN -> %d Hz\n", GetHXT);
     while(1);
 }
