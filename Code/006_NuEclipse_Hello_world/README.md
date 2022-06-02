@@ -15,5 +15,16 @@ User Manual.
 
 7. Terminal. Window->Show View->Terminal. Далее необходимо указать номер COM порта.  
 
-![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/015.jpg "NuEclipse hello world")
+![alt-текст](https://github.com/PivnevNikolay/Nuvoton-Development-Tool/blob/master/photos/015.jpg "NuEclipse hello world")  
+
+8. Для микроконтроллера  M251EC2AE(based on Arm® Cortex®-M23) который установлен на моей отладочной плате есть особенность при подключении UART0, давайте её рассмотрим. В BSP на М251(М252) у всех примеров подключение модуля UART0 в функции SYS_Init() выполнено при помощи функции Uart0DefaultMPF();  
+
+*void Uart0DefaultMPF(void)*  
+{
+
+    /* Set GPB multi-function pins for UART0 RXD and TXD */
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB12MFP_Msk) | SYS_GPB_MFPH_PB12MFP_UART0_RXD;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB13MFP_Msk) | SYS_GPB_MFPH_PB13MFP_UART0_TXD;
+
+}
 
