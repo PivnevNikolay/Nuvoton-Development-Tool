@@ -1,5 +1,5 @@
 /**-----------------------------------------------------------------------------------------------
-*\date  06.06.2022
+*\date  04.05.2022
 *\brief
 *\authors ScuratovaAnna + PivnevNikolay
 * Telegram "Nuvoton Programming":    https://t.me/nuvoton_programming
@@ -12,6 +12,12 @@
 #define ADDR_FIXED 0x44
 #define ADDR_AUTO  0x40
 const uint8_t digitHEX[] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f, 0x00, 0x40}; //0~9
+//*************************************************************************************************************
+//                        H     E     L     L     O                 1     6     3     7           D     i     S     P
+uint8_t Hello_world[] = {0x76, 0x79, 0x38, 0x38, 0x3f, 0x00, 0x00, 0x06, 0x7d, 0x4f, 0x07, 0x00, 0x3f, 0x10, 0x6d, 0x73,
+//                        l     A     Y                           0    1    2    3    4    5    6    7    8    9
+                        0x06, 0x77, 0x6e, 0x00, 0x00,0x00, 0x00,0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+//*************************************************************************************************************
 uint8_t lastData[4];
 uint8_t PointData;
 uint8_t Cmd_DispCtrl;
@@ -29,7 +35,8 @@ void sendArray(uint8_t sendData[]);
 void display_Byte(uint8_t bit0, uint8_t bit1, uint8_t bit2, uint8_t bit3);
 void start(void);
 void stop(void);
-
+void runningString(uint8_t DispData[], uint8_t amount, int delayMs);
+//*************************************************************************************************************
 void SYS_Init(void)
 {
 /* Unlock protected registers */
@@ -59,6 +66,7 @@ SYS->GPC_MFPL = (SYS->GPC_MFPL & ~SYS_GPC_MFPL_PC1MFP_Msk)  | SYS_GPC_MFPL_PC1MF
 /* Lock protected registers */
 SYS_LockReg();
 }
+//*************************************************************************************************************
 void UART0_Init()
 {
 /* Reset UART module */
@@ -66,6 +74,7 @@ SYS_ResetModule(UART0_RST);
 /* Configure UART0 and set UART0 baud rate */
 UART_Open(UART0, 115200);
 }
+//*************************************************************************************************************
 int main()
 {
 SYS_Init();
@@ -75,13 +84,15 @@ GPIO_SetMode(PC, BIT1, GPIO_MODE_OUTPUT);//DIO
 //printf("\n Start test: \n");
 clear();
 brightness_(7, 0x40, 0xc0); // brightness, 0 - 7 (min - max)
+clear();
+display_Byte(0x3f, 0x06, 0x5b, 0x4f);
+TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
+clear();
+display_Byte(0x66, 0x6d, 0x7d, 0x07);
+TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
+//*************************************************************************************************************
 while(1){
-  clear();
-  display_Byte(0x3f, 0x06, 0x5b, 0x4f);
-  TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
-  clear();
-  display_Byte(0x66, 0x6d, 0x7d, 0x07);
-  TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
+  runningString(Hello_world, sizeof(Hello_world), 350000);
  }
 }
 //*************************************************************************************************************
@@ -208,6 +219,23 @@ void stop(void)
   PC1 = 0;
   PC0 = 1;
   PC1 = 1;
+}
+//*************************************************************************************************************
+void runningString(uint8_t DispData[], uint8_t amount, int delayMs) {
+  uint8_t segm_data[amount + 8];
+  for (uint8_t i = 0; i < 4; i++) {
+  segm_data[i] = 0x00;
+  }
+  for (uint8_t i = 0; i < amount; i++) {
+  segm_data[i + 4] = DispData[i];
+  }
+  for (uint8_t i = amount + 4; i < amount + 8; i++) {
+  segm_data[i] = 0x00;
+  }
+  for (uint8_t i = 0; i <= amount + 4; i++) {
+  display_Byte(segm_data[i], segm_data[i + 1], segm_data[i + 2], segm_data[i + 3]);
+  TIMER_Delay(TIMER0, delayMs);
+  }
 }
 //*************************************************************************************************************
 
