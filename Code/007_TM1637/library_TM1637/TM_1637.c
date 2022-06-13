@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "stdbool.h"
 #include "NuMicro.h"
 #include "TM_1637.h"
 #define ADDR_FIXED 0x44
@@ -150,5 +151,103 @@ void runningString(uint8_t DispData[], uint8_t amount, int delayMs) {
   display_Byte(segm_data[i], segm_data[i + 1], segm_data[i + 2], segm_data[i + 3]);
   TIMER_Delay(TIMER0, delayMs);
   }
+}
+//*************************************************************************************************************
+void scroll(uint8_t DispData[], int delayms) {
+	uint8_t DispDataByte[4];
+    for (uint8_t i = 0; i < 4; i++) {
+        DispDataByte[i] = digitHEX[DispData[i]];
+    }
+    scrollByte(DispDataByte, delayms);
+}
+//*************************************************************************************************************
+void scrollByte(uint8_t DispData[], int delayms) {
+	int8_t lastBytes[4];
+	int8_t step;
+	int8_t stepArray[4];
+    bool changeByte[4] = {0, 0, 0, 0};
+
+    for (int8_t i = 0; i < 4; i++) {
+        if (DispData[i] != lastData[i]) changeByte[i] = 1;
+        lastBytes[i] = 	lastData[i];
+    }
+
+    for (int8_t i = 0; i < 4; i++) {
+    	int8_t lastByte = lastData[i];
+        stepArray[i] = lastByte;
+
+        if (changeByte[i]) {
+            step = 0;
+            swapBytes(&step, lastByte, 6, 0);
+            swapBytes(&step, lastByte, 2, 1);
+            swapBytes(&step, lastByte, 4, 5);
+            swapBytes(&step, lastByte, 3, 6);
+            stepArray[i] = step;
+        }
+    }
+    displayByte(stepArray);
+    TIMER_Delay(TIMER0, delayms);
+
+    for (int8_t i = 0; i < 4; i++) {
+    	int8_t lastByte = lastBytes[i];
+        stepArray[i] = lastByte;
+
+        if (changeByte[i]) {
+            step = 0;
+            swapBytes(&step, lastByte, 3, 0);
+            stepArray[i] = step;
+        }
+    }
+    displayByte(stepArray);
+    TIMER_Delay(TIMER0, delayms);
+
+    for (int8_t i = 0; i < 4; i++) {
+        if (changeByte[i]) {
+            stepArray[i] = 0;
+        }
+    }
+    displayByte(stepArray);
+    TIMER_Delay(TIMER0, delayms);
+
+    for (int8_t i = 0; i < 4; i++) {
+    	int8_t lastByte = lastBytes[i];
+    	int8_t newByte = DispData[i];
+        stepArray[i] = lastByte;
+
+        if (changeByte[i]) {
+            step = 0;
+            swapBytes(&step, newByte, 0, 3);
+            stepArray[i] = step;
+        }
+    }
+    displayByte(stepArray);
+    TIMER_Delay(TIMER0, delayms);
+
+    for (int8_t i = 0; i < 4; i++) {
+    	int8_t newByte = DispData[i];
+        stepArray[i] = lastBytes[i];
+
+        if (changeByte[i]) {
+            step = 0;
+            swapBytes(&step, newByte, 0, 6);
+            swapBytes(&step, newByte, 1, 2);
+            swapBytes(&step, newByte, 5, 4);
+            swapBytes(&step, newByte, 6, 3);
+            stepArray[i] = step;
+        }
+    }
+    displayByte(stepArray);
+    TIMER_Delay(TIMER0, delayms);
+
+    for (int8_t i = 0; i < 4; i++) {
+        displayByte(DispData);
+    }
+}
+//*************************************************************************************************************
+void swapBytes(int8_t* newByte, int8_t oldByte, int8_t newP, int8_t oldP) {
+	int8_t newBit = 0;
+    if (oldByte & (1 << oldP)) newBit = 1;
+    else newBit = 0;
+    *newByte = *newByte | (newBit << newP);
 }
 //*************************************************************************************************************

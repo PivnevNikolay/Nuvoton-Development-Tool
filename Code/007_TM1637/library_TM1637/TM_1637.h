@@ -14,4 +14,8 @@ void start(void);
 void stop(void);
 void runningString(uint8_t DispData[], uint8_t amount, int delayMs);
 
+void scrollByte(uint8_t DispData[], int delayms);
+void swapBytes(int8_t* newByte, int8_t oldByte, int8_t newP, int8_t oldP);
+void scroll(uint8_t DispData[], int delayms);
+
 #endif
