@@ -300,3 +300,70 @@ void displayByte_segment(uint8_t BitAddr, uint8_t DispData)
     sendByte(BitAddr, SegData);
 }
 //*****************************************scroll_segment******************************************************
+//********************************************twist************************************************************
+
+void twist(uint8_t DispData[], int delayms) {
+	uint8_t newData[4];
+    for (uint8_t i = 0; i < 4; i++) {
+        newData[i] = digitHEX[DispData[i]];
+    }
+    twistByte(newData, delayms);
+}
+
+void twistByte(uint8_t DispData[], int delayms) {
+	uint8_t step;
+	uint8_t stepArray[4];
+    bool changeByte[4] = {0, 0, 0, 0};
+
+    for (uint8_t i = 0; i < 4; i++) {
+        if (DispData[i] != lastData[i]) changeByte[i] = 1;
+        stepArray[i] = DispData[i];
+    }
+
+    step = step & 0b00111111;
+    for (uint8_t i = 0; i < 5; i++) {
+        step |= (1 << i);
+        for (uint8_t k = 0; k < 4; k++) {
+            if (changeByte[k])
+            stepArray[k] = step;
+        }
+        displayByte(stepArray);
+        TIMER_Delay(TIMER0, delayms);
+    }
+    for (uint8_t i = 0; i < 6; i++) {
+        step = 0b11000000;
+        step = ~(step | (1 << i) | (1 << i + 1));
+        for (uint8_t k = 0; k < 4; k++) {
+            if (changeByte[k]) stepArray[k] = step;
+        }
+        displayByte(stepArray);
+        TIMER_Delay(TIMER0, delayms);
+    }
+    step = 0b11000000;
+    for (uint8_t i = 0; i < 6; i++) {
+        step |= (1 << i);
+        for (uint8_t k = 0; k < 4; k++) {
+            if (changeByte[k])
+            stepArray[k] = ~step;
+        }
+        displayByte(stepArray);
+        TIMER_Delay(TIMER0, delayms);
+    }
+    for (uint8_t k = 0; k < 4; k++) {
+        if (changeByte[k])
+        stepArray[k] = 0b0000000;
+    }
+    for (uint8_t i = 0; i < 7; i++) {
+        for (uint8_t k = 0; k < 4; k++) {
+            if (changeByte[k]) {
+            	uint8_t newBit = 0;
+                if (DispData[k] & (1 << i)) newBit = 1;
+                else newBit = 0;
+                stepArray[k] |= (newBit << i);
+            }
+        }
+        displayByte(stepArray);
+        TIMER_Delay(TIMER0, delayms);
+    }
+}
+//********************************************twist************************************************************

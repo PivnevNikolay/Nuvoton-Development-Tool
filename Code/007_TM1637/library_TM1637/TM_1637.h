@@ -24,4 +24,8 @@ void scroll_segment(uint8_t BitAddr, uint8_t DispData, int delayms);
 void scroll_Byte_segment(uint8_t BitAddr, uint8_t DispData, int delayms);
 void displayByte_segment(uint8_t BitAddr, uint8_t DispData);
 //*****************************************scroll_segment******************************************************
+//********************************************twist************************************************************
+void twist(uint8_t DispData[], int delayms);
+void twistByte(uint8_t DispData[], int delayms);
+//********************************************twist************************************************************
 #endif

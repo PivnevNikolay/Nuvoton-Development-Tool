@@ -11,6 +11,7 @@ uint8_t Hello_world[] = {0x76, 0x79, 0x38, 0x38, 0x3f, 0x00, 0x00, 0x06, 0x7d, 0
 //*************************************************************************************************************
 
 void scrolls();
+void twists();
 
 void SYS_Init(void)
 {
@@ -68,7 +69,8 @@ TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
 //**************************************************while(1)***************************************************
 while(1){
   clear();
-  TIMER_Delay(TIMER0, 0xF4240);
+  twists();
+  clear();
   scrolls();
   runningString(Hello_world, sizeof(Hello_world), 350000);
  }
@@ -94,6 +96,11 @@ void scrolls() {
       TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
   }
   scroll_set_all(2, 3, 0, 1, 150000);//set values to all 4 segments and scroll
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+}
+void twists() {
+  uint8_t digs[4] = {3, 5, 3, 5};
+  twist(digs, 50000);     
   TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
 }
 //***********************************************the end*******************************************************
