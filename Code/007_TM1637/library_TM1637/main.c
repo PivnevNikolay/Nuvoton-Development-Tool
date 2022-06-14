@@ -2,6 +2,7 @@
 #include "NuMicro.h"
 #include "TM_1637.h"
 #include "stdbool.h"
+
 //*************************************************************************************************************
 //                        H     E     L     L     O                 1     6     3     7           D     i     S     P
 uint8_t Hello_world[] = {0x76, 0x79, 0x38, 0x38, 0x3f, 0x00, 0x00, 0x06, 0x7d, 0x4f, 0x07, 0x00, 0x3f, 0x10, 0x6d, 0x73,
@@ -10,7 +11,7 @@ uint8_t Hello_world[] = {0x76, 0x79, 0x38, 0x38, 0x3f, 0x00, 0x00, 0x06, 0x7d, 0
 //*************************************************************************************************************
 
 void scrolls();
-//*************************************************************************************************************
+
 void SYS_Init(void)
 {
 /* Unlock protected registers */
@@ -48,7 +49,7 @@ SYS_ResetModule(UART0_RST);
 /* Configure UART0 and set UART0 baud rate */
 UART_Open(UART0, 115200);
 }
-//*************************************************************************************************************
+//***********************************************main**********************************************************
 int main()
 {
 SYS_Init();
@@ -64,17 +65,35 @@ TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
 clear();
 display_Byte(0x66, 0x6d, 0x7d, 0x07);
 TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
-//*************************************************************************************************************
+//**************************************************while(1)***************************************************
 while(1){
-  runningString(Hello_world, sizeof(Hello_world), 350000);
-  //clear();
+  clear();
+  TIMER_Delay(TIMER0, 0xF4240);
   scrolls();
+  runningString(Hello_world, sizeof(Hello_world), 350000);
  }
 }
 //*************************************************************************************************************
+//*******************************************functions*********************************************************
 void scrolls() {
-  // прокрутка массив ЦИФР
+  // set an array of numbers
   int8_t digs[4] = {4, 5, 6, 7};
-  scroll(digs, 190000);     // скорость прокрутки 190000
+  scroll(digs, 190000);     // scroll all segments
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  scroll_segment(0, 8, 120000);//set 8 and rotate the first segment
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  scroll_segment(1, 9, 120000);//set 9 and twist the second segment
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  scroll_segment(2, 0, 120000);//set to 0 and twist the third segment
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  scroll_segment(3, 1, 120000);//set 1 and twist the fourth segment
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  clear();
+  for (uint8_t i = 0; i < 10; i++) {
+      scroll_segment(3, i, 100000);
+      TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  }
+  scroll_set_all(2, 3, 0, 1, 150000);//set values to all 4 segments and scroll
   TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
 }
+//***********************************************the end*******************************************************

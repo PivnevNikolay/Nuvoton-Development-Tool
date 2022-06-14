@@ -153,6 +153,13 @@ void runningString(uint8_t DispData[], uint8_t amount, int delayMs) {
   }
 }
 //*************************************************************************************************************
+//*********************************************scroll**********************************************************
+void scroll_set_all(uint8_t bit0, uint8_t bit1, uint8_t bit2, uint8_t bit3, int delayms) {
+	uint8_t DispData[] = {digitHEX[bit0], digitHEX[bit1], digitHEX[bit2], digitHEX[bit3]};
+    scrollByte(DispData, delayms);
+}
+
+
 void scroll(uint8_t DispData[], int delayms) {
 	uint8_t DispDataByte[4];
     for (uint8_t i = 0; i < 4; i++) {
@@ -160,7 +167,6 @@ void scroll(uint8_t DispData[], int delayms) {
     }
     scrollByte(DispDataByte, delayms);
 }
-//*************************************************************************************************************
 void scrollByte(uint8_t DispData[], int delayms) {
 	int8_t lastBytes[4];
 	int8_t step;
@@ -243,11 +249,54 @@ void scrollByte(uint8_t DispData[], int delayms) {
         displayByte(DispData);
     }
 }
-//*************************************************************************************************************
+
 void swapBytes(int8_t* newByte, int8_t oldByte, int8_t newP, int8_t oldP) {
 	int8_t newBit = 0;
     if (oldByte & (1 << oldP)) newBit = 1;
     else newBit = 0;
     *newByte = *newByte | (newBit << newP);
 }
-//*************************************************************************************************************
+//*********************************************scroll**********************************************************
+//*****************************************scroll_segment******************************************************
+void scroll_segment(uint8_t BitAddr, uint8_t DispData, int delayms) {
+	uint8_t DispDataByte = digitHEX[DispData];
+    scroll_Byte_segment(BitAddr, DispDataByte, delayms);
+}
+
+void scroll_Byte_segment(uint8_t BitAddr, uint8_t DispData, int delayms) {
+	uint8_t oldByte = lastData[BitAddr];
+	uint8_t newByte = DispData;
+	uint8_t step;
+
+    step = 0;
+    swapBytes(&step, oldByte, 6, 0);
+    swapBytes(&step, oldByte, 2, 1);
+    swapBytes(&step, oldByte, 4, 5);
+    swapBytes(&step, oldByte, 3, 6);
+    displayByte_segment(BitAddr, step);
+    TIMER_Delay(TIMER0, delayms);
+
+    step = 0;
+    swapBytes(&step, oldByte, 3, 0);
+    swapBytes(&step, newByte, 0, 3);
+    displayByte_segment(BitAddr, step);
+    TIMER_Delay(TIMER0, delayms);
+
+    step = 0;
+    swapBytes(&step, newByte, 0, 6);
+    swapBytes(&step, newByte, 1, 2);
+    swapBytes(&step, newByte, 5, 4);
+    swapBytes(&step, newByte, 6, 3);
+    displayByte_segment(BitAddr, step);
+    TIMER_Delay(TIMER0, delayms);
+
+    displayByte_segment(BitAddr, newByte);
+}
+void displayByte_segment(uint8_t BitAddr, uint8_t DispData)
+{
+    uint8_t SegData;
+    lastData[BitAddr] = DispData;
+    SegData = DispData + PointData;
+    sendByte(BitAddr, SegData);
+}
+//*****************************************scroll_segment******************************************************

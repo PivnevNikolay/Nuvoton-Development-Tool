@@ -13,9 +13,15 @@ void display_Byte(uint8_t bit0, uint8_t bit1, uint8_t bit2, uint8_t bit3);
 void start(void);
 void stop(void);
 void runningString(uint8_t DispData[], uint8_t amount, int delayMs);
-
+//*********************************************scroll**********************************************************
 void scrollByte(uint8_t DispData[], int delayms);
 void swapBytes(int8_t* newByte, int8_t oldByte, int8_t newP, int8_t oldP);
 void scroll(uint8_t DispData[], int delayms);
-
+void scroll_set_all(uint8_t bit0, uint8_t bit1, uint8_t bit2, uint8_t bit3, int delayms);
+//*********************************************scroll**********************************************************
+//*****************************************scroll_segment******************************************************
+void scroll_segment(uint8_t BitAddr, uint8_t DispData, int delayms);
+void scroll_Byte_segment(uint8_t BitAddr, uint8_t DispData, int delayms);
+void displayByte_segment(uint8_t BitAddr, uint8_t DispData);
+//*****************************************scroll_segment******************************************************
 #endif
