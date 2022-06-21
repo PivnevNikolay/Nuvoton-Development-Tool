@@ -366,4 +366,53 @@ void twistByte(uint8_t DispData[], int delayms) {
         TIMER_Delay(TIMER0, delayms);
     }
 }
+void twistByte_segment(uint8_t BitAddr, uint8_t DispData, int delayms) {
+	uint8_t oldByte = lastData[BitAddr];
+	uint8_t newByte = DispData;
+	uint8_t step = oldByte;
+
+    //step = step & 0b0111111;
+	step = step & 0b00111111;
+    for (uint8_t i = 0; i < 5; i++) {
+        step |= (1 << i);
+        displayByte_twist(BitAddr, step);
+        TIMER_Delay(TIMER0, delayms);
+    }
+    for (uint8_t i = 0; i < 6; i++) {
+        //step = 0b1000000;
+    	step = 0b11000000;
+        step = ~(step | (1 << i) | (1 << i + 1));
+
+        displayByte_twist(BitAddr, step);
+        TIMER_Delay(TIMER0, delayms);
+    }
+    //step = 0b1000000;
+    step = 0b11000000;
+    for (uint8_t i = 0; i < 6; i++) {
+        step |= (1 << i);
+        displayByte_twist(BitAddr, ~step);
+        TIMER_Delay(TIMER0, delayms);
+    }
+    step = 0;
+    for (uint8_t i = 0; i < 7; i++) {
+    	uint8_t newBit = 0;
+        if (newByte & (1 << i)) newBit = 1;
+        else newBit = 0;
+        step |= (newBit << i);
+        displayByte_twist(BitAddr, step);
+        TIMER_Delay(TIMER0, delayms);
+    }
+    displayByte_twist(BitAddr, newByte);
+}
+void displayByte_twist(uint8_t BitAddr, uint8_t DispData)
+{
+    uint8_t SegData;
+    lastData[BitAddr] = DispData;
+    SegData = DispData + PointData;
+    sendByte(BitAddr, SegData);
+}
+
+void twist_number(uint8_t BitAddr, uint8_t DispData, int delayms) {
+    twistByte_segment(BitAddr, digitHEX[DispData], delayms);
+}
 //********************************************twist************************************************************

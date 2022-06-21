@@ -27,5 +27,8 @@ void displayByte_segment(uint8_t BitAddr, uint8_t DispData);
 //********************************************twist************************************************************
 void twist(uint8_t DispData[], int delayms);
 void twistByte(uint8_t DispData[], int delayms);
+void twistByte_segment(uint8_t BitAddr, uint8_t DispData, int delayms);
+void displayByte_twist(uint8_t BitAddr, uint8_t DispData);
+void twist_number(uint8_t BitAddr, uint8_t DispData, int delayms);
 //********************************************twist************************************************************
 #endif

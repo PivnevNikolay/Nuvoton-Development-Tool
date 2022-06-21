@@ -1,3 +1,12 @@
+/**-----------------------------------------------------------------------------------------------
+*\date  04.05.2022
+*\brief
+*\authors ScuratovaAnna + PivnevNikolay
+* Telegram "Nuvoton Programming":    https://t.me/nuvoton_programming
+* M251EC2AE 32 KB Flash 8 KB SRAM
+*      https://www.nuvoton.com/products/microcontrollers/arm-cortex-m23-mcus/m251-m252-series/m251ec2ae
+*      https://alexgyver.ru/tm1637_display/
+*/
 #include "stdio.h"
 #include "NuMicro.h"
 #include "TM_1637.h"
@@ -69,10 +78,12 @@ TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
 //**************************************************while(1)***************************************************
 while(1){
   clear();
+  //TIMER_Delay(TIMER0, 0xF4240);
   twists();
   clear();
+  //TIMER_Delay(TIMER0, 0xF4240);
   scrolls();
-  runningString(Hello_world, sizeof(Hello_world), 350000);
+  //runningString(Hello_world, sizeof(Hello_world), 350000);
  }
 }
 //*************************************************************************************************************
@@ -91,16 +102,37 @@ void scrolls() {
   scroll_segment(3, 1, 120000);//set 1 and twist the fourth segment
   TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
   clear();
-  for (uint8_t i = 0; i < 10; i++) {
-      scroll_segment(3, i, 100000);
-      TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  for (uint8_t i = 0; i < 6; i++) {
+	scroll_segment(3, i, 100000);
+    TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
   }
   scroll_set_all(2, 3, 0, 1, 150000);//set values to all 4 segments and scroll
   TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
 }
 void twists() {
+  // twisting an array of digits
   uint8_t digs[4] = {3, 5, 3, 5};
-  twist(digs, 50000);     
+  twist(digs, 50000);
   TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  twistByte_segment(1, 0x7f, 50000);
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  twist_number(1, 7, 50000);
+  TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  clear();
+  for (uint8_t i = 0; i < 3; i++) {
+	twist_number(2, i, 25000);
+    TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  }
+  for (uint8_t i = 0; i < 5; i++) {
+	twist_number(1, i, 25000);
+    TIMER_Delay(TIMER0, 0xF4240);//delay 1 seconds
+  }
+  //clear();
+  // twisting an array of digits
+  uint8_t troll[4] = {0x78, 0x50, 0x5c, 0x06};//trol
+  twistByte(troll, 50000);
+  TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
+  twistByte_segment(2, 0x3d, 50000);
+  TIMER_Delay(TIMER0, 0x1E8480);//delay 2 seconds
 }
 //***********************************************the end*******************************************************
