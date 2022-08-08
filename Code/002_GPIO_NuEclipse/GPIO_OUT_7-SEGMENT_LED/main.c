@@ -73,8 +73,9 @@ int main()
     CLK_SysTickDelay(349525);
        break;
        case 4:
-    PA->DOUT &= ~((1 << 0)|(1 << 1)|(1 << 2)|(1 << 3)|(1 << 4)|(1 << 5)|(1<<6));
-    PA->DOUT |= (1 << 1)|(1 <<2)|(1 << 5)|(1<<6);//4
+    PA->DOUT &= ~(GPIO_DOUT_DOUT0_Msk|GPIO_DOUT_DOUT1_Msk|GPIO_DOUT_DOUT2_Msk|GPIO_DOUT_DOUT3_Msk|GPIO_DOUT_DOUT4_Msk|
+    GPIO_DOUT_DOUT5_Msk|GPIO_DOUT_DOUT6_Msk);
+    PA->DOUT |= GPIO_DOUT_DOUT1_Msk |GPIO_DOUT_DOUT2_Msk |GPIO_DOUT_DOUT5_Msk |GPIO_DOUT_DOUT6_Msk ;//4
     CLK_SysTickDelay(349525);
        break;
      }
