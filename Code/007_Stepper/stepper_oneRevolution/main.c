@@ -9,10 +9,10 @@ uint32_t HCLK;
 const int stepsPerRevolution = 2048;
  int number_of_steps;
 int step_number;
-unsigned long last_step_time;//отметка времени, когда был сделан последний шаг
+unsigned long last_step_time;
 unsigned long step_delay;
 unsigned long now;
-unsigned long last_step_time = 0; // отметка времени, когда был сделан последний шаг
+unsigned long last_step_time = 0; 
 //---------------------------------------------------------------//
 void stepMotor(uint8_t thisStep);
 void setSpeed(long whatSpeed);
@@ -56,22 +56,18 @@ void setSpeed(long whatSpeed)
 {
  number_of_steps=stepsPerRevolution;
  step_delay = 60L * 1000L * 1000L / number_of_steps / whatSpeed;
- //step_delay = 60*1000*1000/2048/11 =2663
 }
 
 
 void step(int steps_to_move){
     int steps_left = abs(steps_to_move);  // how many steps to take
-    // определить направление на основе того, является ли steps_to_mode + или -
     bool direction;
     if (steps_to_move > 0) { direction = true; }
     if (steps_to_move < 0) { direction = false; }
     printf(" %u \n", direction);
-     // уменьшать количество шагов, каждый раз перемещаясь на один шаг:
     while (steps_left > 0)
     {
     micros();
-    // двигаться, только если прошла соответствующая задержка:
     if (now - last_step_time >= step_delay)
     {
      // get the timeStamp of when you stepped:
@@ -97,7 +93,6 @@ void step(int steps_to_move){
      // decrement the steps left:
      steps_left--;
      // step the motor to step number 0, 1, ..., {3 or 10}
-     //stepMotor(step_number % 4);//& 0b11
      stepMotor(step_number & 0b11);
      printf(" %d \n", step_number);
     }
