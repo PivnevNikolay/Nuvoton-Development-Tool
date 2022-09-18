@@ -53,19 +53,19 @@ int main()
 }
 
 void encoder_Tick(void) {
-	GPIOState =PA4|PA5<<1;
-	switch (resetFlag) {
-    case 0:
+  GPIOState =PA4|PA5<<1;
+   switch (resetFlag) {
+   case 0:
      BUF[0]=GPIOState;
      resetFlag=true;
-    break;
-    case 1:
+   break;
+   case 1:
      BUF[1]=GPIOState;
      BUF[2]=BUF[0]+BUF[1];
-     if (BUF[2] == 1u || BUF[2] == 5u) {encoder_Counter++;}
-     else if (BUF[2] == 2u || BUF[2] == 4u) {encoder_Counter--;}
+    if (BUF[2] == 1u || BUF[2] == 5u) {encoder_Counter++;}
+    else if (BUF[2] == 2u || BUF[2] == 4u) {encoder_Counter--;}
      resetFlag =false;
      flag = true;
-    break;
+   break;
   }
 }
