@@ -2,7 +2,7 @@
 *\date  18.01.2023
 *\brief
 *\authors ScuratovaAnna + PivnevNikolay
-* M031FC1Ae 32 KB Flash 4 KB SRAM
+*\M031FC1Ae 32 KB Flash 4 KB SRAM
 */
 
 #include <stdio.h>
